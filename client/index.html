@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>AETHER — accesorios para verse facheros</title>
+    <meta name="description" content="¿Streetwear? ¿Fairycore? ¿Y2K? ¿Goth? En Aether hay espacio para todos los estilos. Accesorios, lentes, comida asiática y encargos cada mes." />
+    <meta property="og:site_name" content="AETHER" />
+    <meta name="theme-color" content="#07060a" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script>
+      // El tema se aplica antes de pintar para que no haya destello.
+      try {
+        var t = localStorage.getItem("aether-theme");
+        if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

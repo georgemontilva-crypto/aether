@@ -1,0 +1,1347 @@
+{
+ "source": "https://aether-store.odoo.com",
+ "extractedAt": "2026-11-25",
+ "products": [
+  {
+   "odooId": 2,
+   "name": "Nana's ring",
+   "slug": "nana-s-ring",
+   "price": 8.9,
+   "category": "accesorios",
+   "odooCategories": [
+    "anillos"
+   ],
+   "tags": [
+    "anillo"
+   ],
+   "options": "8,9,10",
+   "imageHash": "740693f"
+  },
+  {
+   "odooId": 16,
+   "name": "Palillos",
+   "slug": "palillos",
+   "price": 1.65,
+   "category": "comida",
+   "odooCategories": [
+    "comida"
+   ],
+   "tags": [
+    "comida",
+    "palillos"
+   ],
+   "options": "",
+   "imageHash": "d6b33f6"
+  },
+  {
+   "odooId": 24,
+   "name": "Posavasos gatito",
+   "slug": "posavasos-gatito",
+   "price": 4.0,
+   "category": "comida",
+   "odooCategories": [
+    "comida"
+   ],
+   "tags": [
+    "comida",
+    "posavasos"
+   ],
+   "options": "",
+   "imageHash": "24b69e0"
+  },
+  {
+   "odooId": 42,
+   "name": "Cinturón classic",
+   "slug": "cinturon-classic",
+   "price": 10.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "cinturón"
+   ],
+   "tags": [
+    "cinturón"
+   ],
+   "options": "",
+   "imageHash": "1b47947"
+  },
+  {
+   "odooId": 141,
+   "name": "Arcane collar",
+   "slug": "arcane-collar",
+   "price": 10.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "collar"
+   ],
+   "tags": [
+    "collar"
+   ],
+   "options": "",
+   "imageHash": "1587f36"
+  },
+  {
+   "odooId": 165,
+   "name": "Teddy bear",
+   "slug": "teddy-bear",
+   "price": 1.5,
+   "category": "accesorios",
+   "odooCategories": [
+    "Pendientes"
+   ],
+   "tags": [
+    "pendientes"
+   ],
+   "options": "",
+   "imageHash": "0de2972"
+  },
+  {
+   "odooId": 269,
+   "name": "Pink harajuku",
+   "slug": "pink-harajuku",
+   "price": 2.5,
+   "category": "accesorios",
+   "odooCategories": [
+    "collar"
+   ],
+   "tags": [
+    "collar"
+   ],
+   "options": "",
+   "imageHash": "f63a72d"
+  },
+  {
+   "odooId": 338,
+   "name": "faded orchid",
+   "slug": "faded-orchid",
+   "price": 5.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "cabello"
+   ],
+   "tags": [
+    "cabello"
+   ],
+   "options": "",
+   "imageHash": "058984e"
+  },
+  {
+   "odooId": 411,
+   "name": "Sakura posavasos",
+   "slug": "sakura-posavasos",
+   "price": 4.0,
+   "category": "comida",
+   "odooCategories": [
+    "comida"
+   ],
+   "tags": [
+    "comida",
+    "posavasos"
+   ],
+   "options": "",
+   "imageHash": "ef8d70b"
+  },
+  {
+   "odooId": 418,
+   "name": "Rizador",
+   "slug": "rizador",
+   "price": 5.0,
+   "category": "otros",
+   "odooCategories": [
+    "maquillaje"
+   ],
+   "tags": [
+    "maquillaje"
+   ],
+   "options": "",
+   "imageHash": "0617f07"
+  },
+  {
+   "odooId": 457,
+   "name": "ballet noir top (M)",
+   "slug": "ballet-noir-top-m",
+   "price": 14.5,
+   "category": "otros",
+   "odooCategories": [
+    "ropa"
+   ],
+   "tags": [
+    "ropa",
+    "top"
+   ],
+   "options": "",
+   "imageHash": "b9fe3ac"
+  },
+  {
+   "odooId": 460,
+   "name": "lineal void (M)",
+   "slug": "lineal-void-m",
+   "price": 20.4,
+   "category": "otros",
+   "odooCategories": [
+    "ropa"
+   ],
+   "tags": [
+    "ropa"
+   ],
+   "options": "",
+   "imageHash": "0e28900"
+  },
+  {
+   "odooId": 461,
+   "name": "dollette ruffles (M)",
+   "slug": "dollette-ruffles-m",
+   "price": 15.0,
+   "category": "otros",
+   "odooCategories": [
+    "ropa"
+   ],
+   "tags": [
+    "ropa"
+   ],
+   "options": "",
+   "imageHash": "04674b7"
+  },
+  {
+   "odooId": 464,
+   "name": "Siren blue peluca",
+   "slug": "siren-blue-peluca",
+   "price": 28.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "cabello"
+   ],
+   "tags": [
+    "cabello",
+    "peluca"
+   ],
+   "options": "",
+   "imageHash": "13a60cc"
+  },
+  {
+   "odooId": 477,
+   "name": "Tullip scrunchie",
+   "slug": "tullip-scrunchie",
+   "price": 3.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "cabello"
+   ],
+   "tags": [
+    "cabello",
+    "scrunchie"
+   ],
+   "options": "",
+   "imageHash": "73e5c25"
+  },
+  {
+   "odooId": 478,
+   "name": "VILE_WIRE",
+   "slug": "vile-wire",
+   "price": 6.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "collar"
+   ],
+   "tags": [
+    "collar"
+   ],
+   "options": "",
+   "imageHash": "cdc743d"
+  },
+  {
+   "odooId": 489,
+   "name": "cyber cupid",
+   "slug": "cyber-cupid",
+   "price": 5.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "collar"
+   ],
+   "tags": [
+    "collar"
+   ],
+   "options": "",
+   "imageHash": "32f9ef7"
+  },
+  {
+   "odooId": 512,
+   "name": "Eden’s whisper",
+   "slug": "edens-whisper",
+   "price": 8.1,
+   "category": "accesorios",
+   "odooCategories": [
+    "collar"
+   ],
+   "tags": [
+    "collar"
+   ],
+   "options": "",
+   "imageHash": "15bab50"
+  },
+  {
+   "odooId": 515,
+   "name": "Mercenary-core wrap",
+   "slug": "mercenary-core-wrap",
+   "price": 15.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "cinturón"
+   ],
+   "tags": [
+    "cinturón"
+   ],
+   "options": "",
+   "imageHash": "15f6b8e"
+  },
+  {
+   "odooId": 520,
+   "name": "Blood petal",
+   "slug": "blood-petal",
+   "price": 2.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "anillos"
+   ],
+   "tags": [
+    "anillo"
+   ],
+   "options": "",
+   "imageHash": "ca74d77"
+  },
+  {
+   "odooId": 522,
+   "name": "Opal nymph",
+   "slug": "opal-nymph",
+   "price": 5.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "Pendientes"
+   ],
+   "tags": [
+    "pendientes"
+   ],
+   "options": "",
+   "imageHash": "f31ab28"
+  },
+  {
+   "odooId": 536,
+   "name": "Kiru-00",
+   "slug": "kiru-00",
+   "price": 4.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "collar"
+   ],
+   "tags": [
+    "collar"
+   ],
+   "options": "",
+   "imageHash": "eb6201d"
+  },
+  {
+   "odooId": 537,
+   "name": "matsuri:SWEET",
+   "slug": "matsuri-sweet",
+   "price": 2.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "Pendientes"
+   ],
+   "tags": [
+    "pendientes"
+   ],
+   "options": "",
+   "imageHash": "9742acd"
+  },
+  {
+   "odooId": 538,
+   "name": "A-N-G-E-L-I-C",
+   "slug": "a-n-g-e-l-i-c",
+   "price": 7.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "collar"
+   ],
+   "tags": [
+    "collar"
+   ],
+   "options": "",
+   "imageHash": "0bf0cce"
+  },
+  {
+   "odooId": 544,
+   "name": "{ star . soft }",
+   "slug": "star-soft",
+   "price": 7.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "collar"
+   ],
+   "tags": [
+    "collar"
+   ],
+   "options": "",
+   "imageHash": "07cce48"
+  },
+  {
+   "odooId": 547,
+   "name": "SPIDER WEB",
+   "slug": "spider-web",
+   "price": 6.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "medias"
+   ],
+   "tags": [
+    "medias"
+   ],
+   "options": "",
+   "imageHash": "2a8b7a0"
+  },
+  {
+   "odooId": 548,
+   "name": "Spell_bound",
+   "slug": "spell-bound",
+   "price": 2.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "pin"
+   ],
+   "tags": [
+    "pin"
+   ],
+   "options": "",
+   "imageHash": "9f92dfd"
+  },
+  {
+   "odooId": 554,
+   "name": "Fnaf_8bit",
+   "slug": "fnaf-8bit",
+   "price": 3.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "llaveros"
+   ],
+   "tags": [
+    "llavero"
+   ],
+   "options": "",
+   "imageHash": "aa02b1d"
+  },
+  {
+   "odooId": 559,
+   "name": "PIRATE KING",
+   "slug": "pirate-king",
+   "price": 2.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "pin"
+   ],
+   "tags": [
+    "pin"
+   ],
+   "options": "",
+   "imageHash": "ed6a2e8"
+  },
+  {
+   "odooId": 562,
+   "name": "Choker tattoo",
+   "slug": "choker-tattoo",
+   "price": 1.5,
+   "category": "accesorios",
+   "odooCategories": [
+    "collar"
+   ],
+   "tags": [
+    "collar",
+    "choker"
+   ],
+   "options": "",
+   "imageHash": "5145b35"
+  },
+  {
+   "odooId": 571,
+   "name": "coquette:arcade",
+   "slug": "coquette-arcade",
+   "price": 3.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "llaveros"
+   ],
+   "tags": [
+    "llavero"
+   ],
+   "options": "",
+   "imageHash": "84b88d7"
+  },
+  {
+   "odooId": 600,
+   "name": "luna_pochette",
+   "slug": "luna-pochette",
+   "price": 12.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "bolso"
+   ],
+   "tags": [
+    "bolso"
+   ],
+   "options": "",
+   "imageHash": "2317d72"
+  },
+  {
+   "odooId": 605,
+   "name": "[ static void ]",
+   "slug": "static-void",
+   "price": 13.5,
+   "category": "accesorios",
+   "odooCategories": [
+    "medias"
+   ],
+   "tags": [
+    "medias"
+   ],
+   "options": "",
+   "imageHash": "f9db513"
+  },
+  {
+   "odooId": 614,
+   "name": "{ industrial . halo }",
+   "slug": "industrial-halo",
+   "price": 6.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "cabello"
+   ],
+   "tags": [
+    "cabello"
+   ],
+   "options": "",
+   "imageHash": "2dc4159"
+  },
+  {
+   "odooId": 625,
+   "name": "[ pore clarify ]",
+   "slug": "pore-clarify",
+   "price": 10.0,
+   "category": "otros",
+   "odooCategories": [
+    "skincare"
+   ],
+   "tags": [
+    "skincare"
+   ],
+   "options": "",
+   "imageHash": "666d22f"
+  },
+  {
+   "odooId": 628,
+   "name": "RAVEN TIE BAG",
+   "slug": "raven-tie-bag",
+   "price": 20.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "bolso"
+   ],
+   "tags": [
+    "bolso"
+   ],
+   "options": "",
+   "imageHash": "ce2c795"
+  },
+  {
+   "odooId": 634,
+   "name": "DIGITAL GLAZE",
+   "slug": "digital-glaze",
+   "price": 3.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "llaveros"
+   ],
+   "tags": [
+    "llavero"
+   ],
+   "options": "",
+   "imageHash": "f0d8b6d"
+  },
+  {
+   "odooId": 635,
+   "name": "OMG RENDER",
+   "slug": "omg-render",
+   "price": 3.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "llaveros"
+   ],
+   "tags": [
+    "llavero"
+   ],
+   "options": "",
+   "imageHash": "16f2eb3"
+  },
+  {
+   "odooId": 636,
+   "name": "FAZ RENDER",
+   "slug": "faz-render",
+   "price": 3.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "llaveros"
+   ],
+   "tags": [
+    "llavero"
+   ],
+   "options": "",
+   "imageHash": "64b8eed"
+  },
+  {
+   "odooId": 643,
+   "name": "TACTILE SHELL",
+   "slug": "tactile-shell",
+   "price": 12.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "guantes"
+   ],
+   "tags": [
+    "guantes"
+   ],
+   "options": "",
+   "imageHash": "21530bf"
+  },
+  {
+   "odooId": 644,
+   "name": "Anubis Relic",
+   "slug": "anubis-relic",
+   "price": 3.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "anillos"
+   ],
+   "tags": [
+    "anillo"
+   ],
+   "options": "",
+   "imageHash": "92ee8fa"
+  },
+  {
+   "odooId": 645,
+   "name": "Marea Oriental",
+   "slug": "marea-oriental",
+   "price": 5.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "Pendientes"
+   ],
+   "tags": [
+    "pendientes"
+   ],
+   "options": "",
+   "imageHash": "c8a3fd7"
+  },
+  {
+   "odooId": 647,
+   "name": "PINK MERCURY",
+   "slug": "pink-mercury",
+   "price": 6.2,
+   "category": "accesorios",
+   "odooCategories": [
+    "Pendientes"
+   ],
+   "tags": [
+    "pendientes"
+   ],
+   "options": "",
+   "imageHash": "7ceef64"
+  },
+  {
+   "odooId": 650,
+   "name": "SILVER WHISKER",
+   "slug": "silver-whisker",
+   "price": 1.5,
+   "category": "accesorios",
+   "odooCategories": [
+    "cabello"
+   ],
+   "tags": [
+    "cabello"
+   ],
+   "options": "",
+   "imageHash": "b539ecc"
+  },
+  {
+   "odooId": 654,
+   "name": "VOID_THREAD",
+   "slug": "void-thread",
+   "price": 4.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "collar"
+   ],
+   "tags": [
+    "collar"
+   ],
+   "options": "",
+   "imageHash": "ba55758"
+  },
+  {
+   "odooId": 656,
+   "name": "THORN : ROOT",
+   "slug": "thorn-root",
+   "price": 2.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "anillos"
+   ],
+   "tags": [
+    "anillo"
+   ],
+   "options": "",
+   "imageHash": "3312f3d"
+  },
+  {
+   "odooId": 657,
+   "name": "orbe_lunar:01",
+   "slug": "orbe-lunar-01",
+   "price": 4.5,
+   "category": "accesorios",
+   "odooCategories": [
+    "collar"
+   ],
+   "tags": [
+    "collar"
+   ],
+   "options": "",
+   "imageHash": "768589e"
+  },
+  {
+   "odooId": 660,
+   "name": "STEEL : PENTACLE",
+   "slug": "steel-pentacle",
+   "price": 2.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "anillos"
+   ],
+   "tags": [
+    "anillo"
+   ],
+   "options": "",
+   "imageHash": "1604a50"
+  },
+  {
+   "odooId": 663,
+   "name": "HEAVY_GRIP",
+   "slug": "heavy-grip",
+   "price": 12.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "guantes"
+   ],
+   "tags": [
+    "guantes"
+   ],
+   "options": "",
+   "imageHash": "880e6df"
+  },
+  {
+   "odooId": 664,
+   "name": "luna_celeste",
+   "slug": "luna-celeste",
+   "price": 2.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "anillos"
+   ],
+   "tags": [
+    "anillo"
+   ],
+   "options": "",
+   "imageHash": "a8f341d"
+  },
+  {
+   "odooId": 671,
+   "name": "COSMIC : ORB",
+   "slug": "cosmic-orb",
+   "price": 3.5,
+   "category": "accesorios",
+   "odooCategories": [
+    "collar"
+   ],
+   "tags": [
+    "collar"
+   ],
+   "options": "",
+   "imageHash": "036dca8"
+  },
+  {
+   "odooId": 672,
+   "name": "BUCKLE : CUFF",
+   "slug": "buckle-cuff",
+   "price": 5.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "pulseras"
+   ],
+   "tags": [
+    "pulsera"
+   ],
+   "options": "",
+   "imageHash": "edbfd1c"
+  },
+  {
+   "odooId": 673,
+   "name": "SPIKE : HARDWARE",
+   "slug": "spike-hardware",
+   "price": 5.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "pulseras"
+   ],
+   "tags": [
+    "pulsera"
+   ],
+   "options": "",
+   "imageHash": "ad33ce1"
+  },
+  {
+   "odooId": 674,
+   "name": "pétalo.de.azúcar",
+   "slug": "petalo-de-azucar",
+   "price": 5.5,
+   "category": "accesorios",
+   "odooCategories": [
+    "Pendientes"
+   ],
+   "tags": [
+    "pendientes"
+   ],
+   "options": "",
+   "imageHash": "19576a1"
+  },
+  {
+   "odooId": 677,
+   "name": "OPAL : MELT",
+   "slug": "opal-melt",
+   "price": 2.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "anillos"
+   ],
+   "tags": [
+    "anillo"
+   ],
+   "options": "",
+   "imageHash": "a381763"
+  },
+  {
+   "odooId": 679,
+   "name": "Lentes redondos",
+   "slug": "lentes-redondos",
+   "price": 10.0,
+   "category": "lentes",
+   "odooCategories": [
+    "lentes"
+   ],
+   "tags": [
+    "lentes"
+   ],
+   "options": "",
+   "imageHash": "56e87ca"
+  },
+  {
+   "odooId": 682,
+   "name": "light chasing cat",
+   "slug": "light-chasing-cat",
+   "price": 16.0,
+   "category": "lentes",
+   "odooCategories": [
+    "lentes de contacto"
+   ],
+   "tags": [
+    "lentesdecontacto"
+   ],
+   "options": "",
+   "imageHash": "2803c36"
+  },
+  {
+   "odooId": 685,
+   "name": "Blue night kiss venus",
+   "slug": "blue-night-kiss-venus",
+   "price": 16.0,
+   "category": "lentes",
+   "odooCategories": [
+    "lentes de contacto"
+   ],
+   "tags": [
+    "lentesdecontacto"
+   ],
+   "options": "",
+   "imageHash": "33df5c7"
+  },
+  {
+   "odooId": 688,
+   "name": "Sakura panna cotta",
+   "slug": "sakura-panna-cotta",
+   "price": 16.0,
+   "category": "lentes",
+   "odooCategories": [
+    "lentes de contacto"
+   ],
+   "tags": [
+    "lentesdecontacto"
+   ],
+   "options": "",
+   "imageHash": "12f061e"
+  },
+  {
+   "odooId": 690,
+   "name": "Chameleon",
+   "slug": "chameleon",
+   "price": 16.0,
+   "category": "lentes",
+   "odooCategories": [
+    "lentes de contacto"
+   ],
+   "tags": [
+    "lentesdecontacto"
+   ],
+   "options": "",
+   "imageHash": "e4495d5"
+  },
+  {
+   "odooId": 691,
+   "name": "shepherdess green",
+   "slug": "shepherdess-green",
+   "price": 16.0,
+   "category": "lentes",
+   "odooCategories": [
+    "lentes de contacto"
+   ],
+   "tags": [
+    "lentesdecontacto"
+   ],
+   "options": "",
+   "imageHash": "8725cb4"
+  },
+  {
+   "odooId": 695,
+   "name": "Basque blue",
+   "slug": "basque-blue",
+   "price": 16.0,
+   "category": "lentes",
+   "odooCategories": [
+    "lentes de contacto"
+   ],
+   "tags": [
+    "lentesdecontacto"
+   ],
+   "options": "",
+   "imageHash": "a69c709"
+  },
+  {
+   "odooId": 699,
+   "name": "Rapunzel",
+   "slug": "rapunzel",
+   "price": 2.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "anillos"
+   ],
+   "tags": [
+    "anillo"
+   ],
+   "options": "",
+   "imageHash": "92e18ef"
+  },
+  {
+   "odooId": 700,
+   "name": "filo_de_cripta",
+   "slug": "filo-de-cripta",
+   "price": 3.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "Pendientes"
+   ],
+   "tags": [
+    "pendientes"
+   ],
+   "options": "",
+   "imageHash": "ba05738"
+  },
+  {
+   "odooId": 701,
+   "name": "BLOOD_RELIC.v1",
+   "slug": "blood-relic-v1",
+   "price": 3.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "Pendientes"
+   ],
+   "tags": [
+    "pendientes"
+   ],
+   "options": "",
+   "imageHash": "41827c4"
+  },
+  {
+   "odooId": 702,
+   "name": "destello.sideral",
+   "slug": "destello-sideral",
+   "price": 3.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "Pendientes"
+   ],
+   "tags": [
+    "pendientes"
+   ],
+   "options": "",
+   "imageHash": "8eeaf7b"
+  },
+  {
+   "odooId": 703,
+   "name": "VENOM_PULSE",
+   "slug": "venom-pulse",
+   "price": 2.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "anillos"
+   ],
+   "tags": [
+    "anillo"
+   ],
+   "options": "",
+   "imageHash": "dc0e523"
+  },
+  {
+   "odooId": 705,
+   "name": "SANCTUM_BLADE.v2",
+   "slug": "sanctum-blade-v2",
+   "price": 10.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "collar",
+    "en pareja"
+   ],
+   "tags": [
+    "collar",
+    "enpareja"
+   ],
+   "options": "",
+   "imageHash": "c49bc0f"
+  },
+  {
+   "odooId": 709,
+   "name": "EAR_MOD.38",
+   "slug": "ear-mod-38",
+   "price": 5.2,
+   "category": "otros",
+   "odooCategories": [
+    "otros"
+   ],
+   "tags": [],
+   "options": "",
+   "imageHash": "6880f8d"
+  },
+  {
+   "odooId": 710,
+   "name": "TIE // HARDWARE_01",
+   "slug": "tie-hardware-01",
+   "price": 25.0,
+   "category": "otros",
+   "odooCategories": [
+    "otros"
+   ],
+   "tags": [],
+   "options": "",
+   "imageHash": "ab4350d"
+  },
+  {
+   "odooId": 712,
+   "name": "DARK_SANCTUM_05",
+   "slug": "dark-sanctum-05",
+   "price": 4.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "collar"
+   ],
+   "tags": [
+    "collar"
+   ],
+   "options": "",
+   "imageHash": "53bb3d6"
+  },
+  {
+   "odooId": 714,
+   "name": "FRAME_MOD.42",
+   "slug": "frame-mod-42",
+   "price": 12.2,
+   "category": "lentes",
+   "odooCategories": [
+    "lentes"
+   ],
+   "tags": [
+    "lentes"
+   ],
+   "options": "",
+   "imageHash": "c81acba"
+  },
+  {
+   "odooId": 715,
+   "name": "FRAME_MOD.43",
+   "slug": "frame-mod-43",
+   "price": 13.0,
+   "category": "lentes",
+   "odooCategories": [
+    "lentes"
+   ],
+   "tags": [
+    "lentes"
+   ],
+   "options": "",
+   "imageHash": "5606462"
+  },
+  {
+   "odooId": 716,
+   "name": "OPTIC // BAYONETTA_RED",
+   "slug": "optic-bayonetta-red",
+   "price": 10.0,
+   "category": "lentes",
+   "odooCategories": [
+    "lentes"
+   ],
+   "tags": [
+    "lentes"
+   ],
+   "options": "",
+   "imageHash": "a3d022c"
+  },
+  {
+   "odooId": 719,
+   "name": "b_ear.01",
+   "slug": "b-ear-01",
+   "price": 15.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "hat"
+   ],
+   "tags": [
+    "gorro"
+   ],
+   "options": "",
+   "imageHash": "a6afe16"
+  },
+  {
+   "odooId": 721,
+   "name": "H-KURAPIKA.01",
+   "slug": "h-kurapika-01",
+   "price": 11.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "anillos",
+    "pulseras"
+   ],
+   "tags": [
+    "anillo",
+    "pulsera"
+   ],
+   "options": "",
+   "imageHash": "7a30fe6"
+  },
+  {
+   "odooId": 726,
+   "name": "LACE_CORE",
+   "slug": "lace-core",
+   "price": 6.1,
+   "category": "otros",
+   "odooCategories": [
+    "otros"
+   ],
+   "tags": [],
+   "options": "",
+   "imageHash": "0c27f03"
+  },
+  {
+   "odooId": 727,
+   "name": "ring_cluster",
+   "slug": "ring-cluster",
+   "price": 3.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "anillos"
+   ],
+   "tags": [
+    "anillo"
+   ],
+   "options": "",
+   "imageHash": "b699527"
+  },
+  {
+   "odooId": 728,
+   "name": "lethal.dose",
+   "slug": "lethal-dose",
+   "price": 5.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "cabello"
+   ],
+   "tags": [
+    "cabello"
+   ],
+   "options": "",
+   "imageHash": "7a5285e"
+  },
+  {
+   "odooId": 731,
+   "name": "pharaoh_glitch",
+   "slug": "pharaoh-glitch",
+   "price": 6.1,
+   "category": "accesorios",
+   "odooCategories": [
+    "collar"
+   ],
+   "tags": [
+    "collar"
+   ],
+   "options": "",
+   "imageHash": "1ea819e"
+  },
+  {
+   "odooId": 732,
+   "name": "INDUSTRIAL_WARM (negro y blanco)",
+   "slug": "industrial-warm-negro-y-blanco",
+   "price": 8.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "medias"
+   ],
+   "tags": [
+    "medias"
+   ],
+   "options": "",
+   "imageHash": "399fc35"
+  },
+  {
+   "odooId": 733,
+   "name": "sideral.rust",
+   "slug": "sideral-rust",
+   "price": 2.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "anillos"
+   ],
+   "tags": [
+    "anillo"
+   ],
+   "options": "",
+   "imageHash": "10c45da"
+  },
+  {
+   "odooId": 734,
+   "name": "espora-lila",
+   "slug": "espora-lila",
+   "price": 2.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "anillos"
+   ],
+   "tags": [
+    "anillo"
+   ],
+   "options": "",
+   "imageHash": "bc6af2a"
+  },
+  {
+   "odooId": 736,
+   "name": "PALLID@TANGENT",
+   "slug": "pallid-tangent",
+   "price": 28.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "cabello"
+   ],
+   "tags": [
+    "cabello"
+   ],
+   "options": "",
+   "imageHash": "0c1313c"
+  },
+  {
+   "odooId": 737,
+   "name": "suero azul oscuro",
+   "slug": "suero-azul-oscuro",
+   "price": 28.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "cabello"
+   ],
+   "tags": [
+    "cabello"
+   ],
+   "options": "",
+   "imageHash": "5cfb5ef"
+  },
+  {
+   "odooId": 738,
+   "name": "Pestañas anime 2.0",
+   "slug": "pestanas-anime-2-0",
+   "price": 8.0,
+   "category": "otros",
+   "odooCategories": [
+    "maquillaje"
+   ],
+   "tags": [
+    "maquillaje",
+    "pestañas"
+   ],
+   "options": "",
+   "imageHash": "dbe3e73"
+  },
+  {
+   "odooId": 739,
+   "name": "HEAVY LITURGY",
+   "slug": "heavy-liturgy",
+   "price": 2.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "anillos"
+   ],
+   "tags": [
+    "anillo"
+   ],
+   "options": "",
+   "imageHash": "c8738c3"
+  },
+  {
+   "odooId": 740,
+   "name": "NOCTURNE_PICK",
+   "slug": "nocturne-pick",
+   "price": 7.0,
+   "category": "accesorios",
+   "odooCategories": [
+    "collar"
+   ],
+   "tags": [
+    "collar"
+   ],
+   "options": "",
+   "imageHash": "756d8f9"
+  },
+  {
+   "odooId": 741,
+   "name": "angel.exe",
+   "slug": "angel-exe",
+   "price": 11.0,
+   "category": "lentes",
+   "odooCategories": [
+    "lentes"
+   ],
+   "tags": [
+    "lentes"
+   ],
+   "options": "",
+   "imageHash": "5821c76"
+  }
+ ]
+}
