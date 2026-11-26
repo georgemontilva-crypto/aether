@@ -3,7 +3,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useCatalog } from "@/lib/catalog";
 import { cart, useCart } from "@/lib/store";
 import { toggleTheme, useTheme } from "@/lib/theme";
-import { IconArrow, IconBag, IconCheck, IconGrid, IconHome, IconMenu, IconMoon, IconSearch, IconSun, IconWhatsApp, IconX, Mark, Marquee, Wordmark } from "./ui";
+import { IconArrow, IconBag, IconCheck, IconMenu, IconMoon, IconSearch, IconSun, IconWhatsApp, IconX, Mark, Marquee, Wordmark } from "./ui";
 
 export function waLink(phone: string, text: string) {
   return `https://wa.me/${phone.replace(/\D/g, "")}?text=${encodeURIComponent(text)}`;
@@ -16,10 +16,11 @@ function CartBadge({ count }: { count: number }) {
   return <span className="absolute -right-2 -top-1.5 grid h-[18px] min-w-[18px] place-items-center rounded-full bg-violet px-1 font-mono text-[10px] leading-none text-on-violet shadow-[0_0_12px_var(--violet)]">{count}</span>;
 }
 
-/** Línea violeta que avanza con la lectura de la página. */
+/** Línea violeta en el borde del encabezado que avanza con la lectura de la página. */
 function Progress() {
+  const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    const el = document.getElementById("progress")!;
+    const el = ref.current!;
     let raf = 0;
     const update = () => {
       raf = 0;
@@ -35,7 +36,7 @@ function Progress() {
       window.removeEventListener("resize", on);
     };
   }, []);
-  return <div id="progress" className="progress" aria-hidden="true" />;
+  return <div ref={ref} className="progress" aria-hidden="true" />;
 }
 
 export function Header({ onMenu }: { onMenu: () => void }) {
@@ -56,7 +57,7 @@ export function Header({ onMenu }: { onMenu: () => void }) {
   }, []);
 
   return (
-    <header ref={ref} className="glass vt-top sticky top-0 z-40 !border-x-0 !border-t-0 !shadow-none" style={{ paddingTop: "env(safe-area-inset-top)" }}>
+    <header ref={ref} className="topbar vt-top" style={{ paddingTop: "env(safe-area-inset-top)" }}>
       {announcement && <Marquee items={[announcement, announcement, announcement]} speed={42} className="border-b border-line py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-muted" />}
       <div className="wrap flex h-14 items-center justify-between gap-4 md:h-16">
         <Link href="/" className="flex items-center gap-3" aria-label="Aether, inicio">
@@ -72,7 +73,7 @@ export function Header({ onMenu }: { onMenu: () => void }) {
         </nav>
 
         <div className="flex items-center">
-          <Link href="/tienda?buscar=1" className="hidden h-11 w-11 place-items-center hover:text-violet md:grid" aria-label="Buscar en la tienda"><IconSearch /></Link>
+          <Link href="/tienda?buscar=1" className="grid h-11 w-11 place-items-center hover:text-violet" aria-label="Buscar en la tienda"><IconSearch /></Link>
           <button className="grid h-11 w-11 place-items-center hover:text-violet" onClick={(e) => toggleTheme({ x: e.clientX, y: e.clientY })} aria-label={theme === "dark" ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}>
             {theme === "dark" ? <IconSun /> : <IconMoon />}
           </button>
@@ -83,6 +84,7 @@ export function Header({ onMenu }: { onMenu: () => void }) {
           <button className="-mr-2 grid h-11 w-11 place-items-center md:hidden" onClick={onMenu} aria-label="Abrir menú"><IconMenu width={24} height={24} /></button>
         </div>
       </div>
+      <Progress />
     </header>
   );
 }
@@ -147,48 +149,32 @@ function Menu({ open, onClose }: { open: boolean; onClose: () => void }) {
   );
 }
 
-/** Barra flotante del teléfono: lo importante siempre al alcance del pulgar. */
-function Dock() {
-  const [path] = useLocation();
+/** En el teléfono, el carrito es un único botón flotante de vidrio (en escritorio va en el encabezado). */
+function CartFab() {
   const count = useCount();
-  if (path.startsWith("/producto/")) return null; // ahí manda la barra de compra del producto
-  const item = "relative flex h-full flex-1 flex-col items-center justify-center gap-1 rounded-[18px] transition-colors active:bg-white/10";
-  const on = (active: boolean) => (active ? "text-ink" : "text-muted");
-  const dot = <span className="absolute bottom-1.5 h-1 w-1 rounded-full bg-violet shadow-[0_0_10px_2px_var(--violet)]" />;
   return (
-    <nav className="glass glass-dark vt-dock fixed inset-x-3 z-40 flex h-[62px] items-stretch rounded-[22px] p-1 md:hidden" style={{ bottom: "calc(env(safe-area-inset-bottom) + 10px)" }} aria-label="Navegación rápida">
-      <Link href="/" className={`${item} ${on(path === "/")}`} aria-current={path === "/" ? "page" : undefined}>
-        <IconHome width={21} height={21} />
-        <span className="font-mono text-[9px] uppercase tracking-[0.14em]">Inicio</span>
-        {path === "/" && dot}
-      </Link>
-      <Link href="/tienda" className={`${item} ${on(path === "/tienda")}`} aria-current={path === "/tienda" ? "page" : undefined}>
-        <IconGrid width={21} height={21} />
-        <span className="font-mono text-[9px] uppercase tracking-[0.14em]">Tienda</span>
-        {path === "/tienda" && dot}
-      </Link>
-      <Link href="/tienda?buscar=1" className={`${item} text-muted`}>
-        <IconSearch width={21} height={21} />
-        <span className="font-mono text-[9px] uppercase tracking-[0.14em]">Buscar</span>
-      </Link>
-      <button className={`${item} ${count ? "text-ink" : "text-muted"}`} onClick={cart.open} aria-label={`Abrir carrito, ${count} productos`}>
-        <span className="relative" data-cart-target><IconBag width={21} height={21} /><CartBadge count={count} /></span>
-        <span className="font-mono text-[9px] uppercase tracking-[0.14em]">Carrito</span>
-      </button>
-    </nav>
+    <button
+      className="glass glass-dark vt-dock fixed right-4 z-40 grid h-[60px] w-[60px] place-items-center rounded-full transition-transform active:scale-90 md:hidden"
+      style={{ bottom: "calc(env(safe-area-inset-bottom) + 16px)" }}
+      onClick={cart.open}
+      aria-label={`Abrir carrito, ${count} productos`}
+    >
+      <span className="relative" data-cart-target>
+        <IconBag width={24} height={24} />
+        <CartBadge count={count} />
+      </span>
+    </button>
   );
 }
 
 function Toast() {
   const { toast } = useCart();
-  const [path] = useLocation();
   if (!toast) return null;
   return (
-    <div className="pointer-events-none fixed inset-x-0 z-[45] flex justify-center px-4 md:!bottom-8" style={{ bottom: `calc(env(safe-area-inset-bottom) + ${path.startsWith("/producto/") ? 92 : 84}px)` }} role="status">
-      <button key={toast.id} className="toast glass glass-dark pointer-events-auto flex h-12 max-w-full items-center gap-3 rounded-full pl-4 pr-5 text-sm" onClick={cart.open}>
+    <div className="pointer-events-none fixed left-4 right-[88px] z-[45] flex md:inset-x-0 md:!bottom-8 md:justify-center" style={{ bottom: "calc(env(safe-area-inset-bottom) + 22px)" }} role="status">
+      <button key={toast.id} className="toast glass glass-dark pointer-events-auto flex h-12 min-w-0 items-center gap-3 rounded-full pl-3 pr-5 text-sm" onClick={cart.open}>
         <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-violet text-on-violet"><IconCheck width={14} height={14} /></span>
         <span className="truncate">{toast.text}</span>
-        <span className="shrink-0 font-mono text-[10px] uppercase tracking-[0.14em] text-violet">Ver carrito</span>
       </button>
     </div>
   );
@@ -200,7 +186,7 @@ export function Footer() {
   const social = [["Instagram", s?.instagram], ["TikTok", s?.tiktok], ["Facebook", s?.facebook]].filter((x): x is [string, string] => !!x[1]);
 
   return (
-    <footer className="mt-28 border-t border-line pb-24 md:pb-0">
+    <footer className="mt-28 border-t border-line pb-16 md:pb-0">
       <div className="wrap grid gap-12 py-14 md:grid-cols-[1.4fr_1fr_1fr]">
         <p className="display text-[clamp(2.2rem,4.2vw,3.4rem)]">Diseñado para aquellos que les gusta verse <span className="text-violet">facheros</span>.</p>
         <div className="flex flex-col gap-3">
@@ -237,11 +223,12 @@ export function Shell({ children }: { children: ReactNode }) {
   const [menu, setMenu] = useState(false);
   return (
     <>
-      <Progress />
       <Header onMenu={() => setMenu(true)} />
+      {/* El encabezado es fijo: este hueco le guarda el sitio. */}
+      <div style={{ height: "var(--header-h, 3.5rem)" }} />
       <main className="min-h-[70vh]">{children}</main>
       <Footer />
-      <Dock />
+      <CartFab />
       <Toast />
       <Menu open={menu} onClose={() => setMenu(false)} />
     </>

@@ -33,7 +33,7 @@ export default function Home() {
     <div ref={ref}>
       {/* ── Hero ── */}
       <section ref={hero} className="relative overflow-hidden border-b border-line">
-        <div className="wrap relative grid min-h-[calc(100svh-6rem)] items-center gap-4 pb-28 pt-6 md:py-10 lg:grid-cols-[1.05fr_1fr] lg:gap-10">
+        <div className="wrap relative grid min-h-[calc(100svh-6rem)] items-center gap-4 pb-12 pt-6 md:py-10 lg:grid-cols-[1.05fr_1fr] lg:gap-10">
           <div className="order-2 lg:order-1" style={{ transform: "translateY(calc(var(--s, 0) * -36px))" }}>
             <p className="label rise" style={{ ["--i" as string]: 0 }}>
               <span className="text-violet">▲</span> El quinto elemento

@@ -558,17 +558,35 @@ input[type="search"]::-webkit-search-cancel-button {
   scroll-snap-align: start;
   flex-shrink: 0;
 }
-/* Línea de avance de lectura */
+/* Línea de avance de lectura, sobre el borde inferior del encabezado */
 .progress {
-  position: fixed;
-  inset: 0 0 auto 0;
+  position: absolute;
+  inset: auto 0 -1px 0;
   height: 2px;
-  z-index: 65;
   transform-origin: left;
   transform: scaleX(var(--p, 0));
   background: linear-gradient(90deg, var(--violet), #e9ddff);
   box-shadow: 0 0 12px var(--violet);
   pointer-events: none;
+}
+/*
+  Encabezado fijo y de color sólido. En iPhone, Safari pinta la franja de la hora y la batería con el
+  color de fondo del elemento fijo de arriba: si fuera translúcido, el contenido se vería pasar por ahí.
+  En escritorio no existe esa franja, así que ahí sí va de vidrio.
+*/
+.topbar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 40;
+  background-color: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+@media (min-width: 768px) {
+  .topbar {
+    background-color: rgb(var(--glass-tint) / 0.58);
+    -webkit-backdrop-filter: blur(22px) saturate(170%);
+    backdrop-filter: blur(22px) saturate(170%);
+  }
 }
 @keyframes bump {
   40% {

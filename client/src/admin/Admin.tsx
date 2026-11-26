@@ -51,7 +51,7 @@ function Frame({ children, pending }: { children: ReactNode; pending: number }) 
 
   return (
     <div className="min-h-screen pb-28 md:pb-10">
-      <header className="glass sticky top-0 z-40 !border-x-0 !border-t-0 !shadow-none" style={{ paddingTop: "env(safe-area-inset-top)" }}>
+      <header className="topbar" style={{ paddingTop: "env(safe-area-inset-top)" }}>
         <div className="wrap flex h-14 items-center justify-between gap-4 md:h-16">
           <Link href="/admin" className="flex items-center gap-3">
             <Mark className="h-7 w-auto" weight={22} />
@@ -75,6 +75,7 @@ function Frame({ children, pending }: { children: ReactNode; pending: number }) 
           </div>
         </div>
       </header>
+      <div className="h-14 md:h-16" style={{ marginTop: "env(safe-area-inset-top)" }} />
       <main className="wrap pt-4 md:pt-6">{children}</main>
 
       {/* En el teléfono todo se maneja con el pulgar desde esta barra. */}

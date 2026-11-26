@@ -5,7 +5,7 @@ import { useCatalog } from "@/lib/catalog";
 import { flyToCart } from "@/lib/fx";
 import { cart, useCart } from "@/lib/store";
 import { ProductGrid, ProductImage, StockBadge } from "@/components/ProductCard";
-import { IconArrow, IconBag, IconCheck, Stepper, useReveal } from "@/components/ui";
+import { IconArrow, IconCheck, Stepper, useReveal } from "@/components/ui";
 import NotFound from "./NotFound";
 
 export default function ProductPage() {
@@ -38,7 +38,6 @@ export default function ProductPage() {
 
   const category = cats.get(p.categoryId);
   const inCart = lines.filter((l) => l.productId === p.id).reduce((a, l) => a + l.qty, 0);
-  const inCartTotal = lines.reduce((a, l) => a + l.qty, 0);
   const left = Math.max(0, p.stock - inCart);
   const sold = p.stock <= 0;
   const related = catalog!.products
@@ -121,18 +120,12 @@ export default function ProductPage() {
             </div>
           )}
 
-          <div className="mt-8 hidden gap-3 md:flex">
+          <div className="mt-8 flex gap-3">
             {!sold && left > 1 && <Stepper value={qty} min={1} max={left} onChange={setQty} />}
             <button className="btn btn-violet flex-1" disabled={sold || left === 0} onClick={add}>{addLabel}</button>
           </div>
-          {!sold && left > 1 && (
-            <div className="mt-7 flex items-center justify-between md:hidden">
-              <span className="label">Cantidad</span>
-              <Stepper value={qty} min={1} max={left} onChange={setQty} />
-            </div>
-          )}
           {!sold && inCart > 0 && (
-            <button className="label mt-3 hidden items-center gap-2 hover:text-ink md:inline-flex" onClick={cart.open}>
+            <button className="label mt-3 inline-flex min-h-11 items-center gap-2 hover:text-ink" onClick={cart.open}>
               Tienes {inCart} en el carrito · ver carrito <IconArrow width={13} height={13} />
             </button>
           )}
@@ -150,20 +143,6 @@ export default function ProductPage() {
           )}
           <p className="mt-6 text-sm text-muted">Sin pagos en línea: envías tu pedido por WhatsApp y coordinas pago y entrega con la tienda.</p>
         </div>
-      </div>
-
-      {/* Barra de compra del teléfono: precio y botón siempre a mano. */}
-      <div className="glass glass-dark vt-dock fixed inset-x-3 z-40 flex h-[66px] items-center gap-2 rounded-[22px] p-2 md:hidden" style={{ bottom: "calc(env(safe-area-inset-bottom) + 10px)" }}>
-        <button className="relative grid h-full w-[52px] shrink-0 place-items-center rounded-[16px] active:bg-white/10" onClick={cart.open} aria-label={`Abrir carrito, ${inCartTotal} productos`}>
-          <span className="relative" data-cart-target>
-            <IconBag width={22} height={22} />
-            {inCartTotal > 0 && <span className="absolute -right-2 -top-1.5 grid h-[18px] min-w-[18px] place-items-center rounded-full bg-violet px-1 font-mono text-[10px] leading-none text-on-violet">{inCartTotal}</span>}
-          </span>
-        </button>
-        <button className="flex h-full flex-1 items-center justify-between gap-3 rounded-[16px] bg-violet px-4 font-mono text-[12px] uppercase tracking-[0.14em] text-on-violet transition-transform active:scale-[0.98] disabled:bg-white/10 disabled:text-white/50" disabled={sold || left === 0} onClick={add}>
-          <span className="flex items-center gap-2">{addLabel}</span>
-          <span className="text-[14px] tabular-nums tracking-normal">{money(p.price * qty)}</span>
-        </button>
       </div>
 
       {related.length > 0 && (
