@@ -212,9 +212,13 @@ export function Footer() {
           <Wordmark className="text-[clamp(3rem,15vw,13rem)] leading-[0.8] !tracking-[0.18em] text-ink/90" />
           <Mark className="mb-2 hidden h-[clamp(3rem,9vw,8rem)] w-auto text-violet sm:block" weight={6} />
         </div>
-        <div className="wrap flex justify-between gap-4 pb-6 font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
+        <div className="wrap flex flex-wrap items-center justify-between gap-x-6 gap-y-3 pb-6 font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
           <span>© {new Date().getFullYear()} Aether</span>
-          <span className="text-right">Hay espacio para todos los estilos</span>
+          <span className="hidden md:inline">Hay espacio para todos los estilos</span>
+          <a href="https://www.gammalabstudio.com" target="_blank" rel="noopener" className="group inline-flex min-h-11 items-center gap-1.5 transition-colors hover:text-ink">
+            Made by <span className="text-ink transition-colors group-hover:text-violet">Gammalab</span>
+            <span aria-hidden="true" className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5">↗</span>
+          </a>
         </div>
       </div>
     </footer>
