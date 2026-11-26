@@ -51,6 +51,17 @@ async function readSource(url: string): Promise<Buffer> {
   return Buffer.from(await res.arrayBuffer());
 }
 
+/** Traduce los errores típicos de R2 a qué variable revisar. */
+function explain(err: unknown): string {
+  const e = err as { name?: string; message?: string };
+  const msg = e?.message ?? String(err);
+  if (/EPROTO|handshake|ENOTFOUND/i.test(msg)) return "R2 no reconoce la cuenta: revisa R2_ACCOUNT_ID (son los 32 caracteres del endpoint, antes de .r2.cloudflarestorage.com).";
+  if (/InvalidAccessKeyId|SignatureDoesNotMatch|Unauthorized|credential/i.test(`${e?.name} ${msg}`)) return "R2 rechazó las claves: revisa R2_ACCESS_KEY_ID y R2_SECRET_ACCESS_KEY.";
+  if (/AccessDenied/i.test(`${e?.name} ${msg}`)) return "El token de R2 no tiene permiso de escritura sobre ese bucket (debe ser Object Read & Write).";
+  if (/NoSuchBucket/i.test(`${e?.name} ${msg}`)) return "Ese bucket no existe en la cuenta: revisa R2_BUCKET.";
+  return msg;
+}
+
 export async function pendingExternalCount(): Promise<number> {
   const rows = await db.select({ id: productImages.id }).from(productImages).where(isNull(productImages.storageKey));
   return rows.length;
@@ -72,7 +83,7 @@ export async function migrateExternalImages(): Promise<void> {
         migration.done++;
       } catch (err) {
         migration.failed++;
-        migration.lastError = err instanceof Error ? err.message : String(err);
+        migration.lastError = explain(err);
       }
     }
   };

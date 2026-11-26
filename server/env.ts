@@ -1,5 +1,15 @@
 const e = process.env;
 
+/** Quita espacios y comillas que se cuelan al pegar valores en Railway. */
+const clean = (v: string | undefined) => (v ?? "").trim().replace(/^["']|["']$/g, "");
+
+/** Acepta el ID de cuenta solo o el endpoint completo de R2 y se queda con el ID. */
+const accountId = (v: string | undefined) =>
+  clean(v)
+    .replace(/^https?:\/\//i, "")
+    .replace(/\/.*$/, "")
+    .replace(/\.r2\.cloudflarestorage\.com$/i, "");
+
 export const env = {
   isProd: e.NODE_ENV === "production",
   port: Number(e.PORT ?? 3000),
@@ -9,11 +19,11 @@ export const env = {
   publicUrl: (e.PUBLIC_URL ?? (e.RAILWAY_PUBLIC_DOMAIN ? `https://${e.RAILWAY_PUBLIC_DOMAIN}` : "")).replace(/\/$/, ""),
   uploadDir: e.UPLOAD_DIR ?? "",
   r2: {
-    accountId: e.R2_ACCOUNT_ID ?? "",
-    accessKeyId: e.R2_ACCESS_KEY_ID ?? "",
-    secretAccessKey: e.R2_SECRET_ACCESS_KEY ?? "",
-    bucket: e.R2_BUCKET ?? "",
-    publicUrl: (e.R2_PUBLIC_URL ?? "").replace(/\/$/, ""),
+    accountId: accountId(e.R2_ACCOUNT_ID),
+    accessKeyId: clean(e.R2_ACCESS_KEY_ID),
+    secretAccessKey: clean(e.R2_SECRET_ACCESS_KEY),
+    bucket: clean(e.R2_BUCKET),
+    publicUrl: clean(e.R2_PUBLIC_URL).replace(/\/$/, ""),
   },
 };
 
