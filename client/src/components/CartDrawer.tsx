@@ -5,7 +5,7 @@ import { useCatalog } from "@/lib/catalog";
 import { cart, useCart } from "@/lib/store";
 import { errorText, trpc } from "@/lib/trpc";
 import { ProductImage } from "./ProductCard";
-import { IconArrow, IconTrash, IconWhatsApp, IconX, Mark, Stepper } from "./ui";
+import { IconArrow, IconTrash, IconWhatsApp, IconX, Mark, Stepper, usePresence } from "./ui";
 
 const CUSTOMER = "aether-cliente";
 
@@ -51,6 +51,8 @@ export function CartDrawer() {
     setError("");
   }, [open]);
 
+  const { mounted, shown } = usePresence(open);
+
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
@@ -73,16 +75,17 @@ export function CartDrawer() {
     }
   };
 
+  if (!mounted) return null;
   return (
-    <div className={`fixed inset-0 z-50 ${open ? "" : "pointer-events-none"}`} aria-hidden={!open}>
-      <div className={`absolute inset-0 bg-black/55 transition-opacity duration-500 ${open ? "opacity-100" : "opacity-0"}`} onClick={cart.close} />
+    // El oscurecido va en la propia capa fija: así Safari también oscurece la franja de la hora.
+    <div className={`fixed inset-0 z-50 transition-colors duration-500 ${shown ? "bg-black/60" : "bg-black/0"}`}>
+      <div className="absolute inset-0" onClick={cart.close} />
       <aside
         role="dialog"
         aria-modal="true"
         aria-label="Carrito de compras"
-        className={`glass absolute right-0 top-0 flex h-full w-full max-w-[460px] flex-col !border-y-0 !border-r-0 transition-transform duration-500 ease-expo ${open ? "translate-x-0" : "translate-x-full"}`}
+        className={`glass absolute right-0 top-0 flex h-full w-full max-w-[460px] flex-col !border-y-0 !border-r-0 transition-transform duration-500 ease-expo ${shown ? "translate-x-0" : "translate-x-full"}`}
         style={{ paddingTop: "env(safe-area-inset-top)", paddingBottom: "env(safe-area-inset-bottom)", background: "rgb(var(--glass-tint) / 0.82)" }}
-        {...(!open ? { inert: true } : {})}
       >
         <div className="flex h-16 shrink-0 items-center justify-between border-b border-line px-5">
           <div className="flex items-baseline gap-3">

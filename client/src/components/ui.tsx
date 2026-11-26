@@ -1,4 +1,4 @@
-import { useEffect, useRef, type ReactNode, type SVGProps } from "react";
+import { useEffect, useRef, useState, type ReactNode, type SVGProps } from "react";
 
 /* ── Logo ────────────────────────────────────────────────────────────────── */
 // Geometría exacta del logo: triángulo exterior, triángulo medial y el triángulo girado inscrito.
@@ -46,6 +46,29 @@ export const IconHome = icon(<><path d="M4 11 12 4l8 7v9H4v-9Z" /><path d="M10 2
 export const IconGrid = icon(<path d="M4 4h7v7H4V4Zm9 0h7v7h-7V4ZM4 13h7v7H4v-7Zm9 0h7v7h-7v-7Z" />);
 export const IconUp = icon(<path d="m6 14 6-6 6 6" />);
 export const IconWhatsApp = icon(<><path d="M3.5 20.5l1.3-4.3A8.5 8.5 0 1 1 8 19.3l-4.5 1.2Z" /><path d="M9.2 8.3c-.4 2.9 3.3 6.7 6.4 6.4l.9-1.4-1.9-1.2-.9.8c-1-.4-2-1.4-2.4-2.4l.8-.9-1.2-1.9-1.7.6Z" /></>);
+
+/**
+ * Monta una capa solo mientras está abierta (o cerrándose). Importa en iPhone: Safari decide el color
+ * de la franja de la hora mirando qué elemento fijo hay arriba, y una capa invisible a pantalla
+ * completa que se quede montada le hace mostrar la página por ahí.
+ * `shown` pasa a true un instante después de montar, para que la entrada se anime.
+ */
+export function usePresence(open: boolean, exitMs = 520) {
+  const [mounted, setMounted] = useState(open);
+  const [shown, setShown] = useState(false);
+  useEffect(() => {
+    if (open) {
+      setMounted(true);
+      let b = 0;
+      const a = requestAnimationFrame(() => (b = requestAnimationFrame(() => setShown(true))));
+      return () => (cancelAnimationFrame(a), cancelAnimationFrame(b));
+    }
+    setShown(false);
+    const t = setTimeout(() => setMounted(false), exitMs);
+    return () => clearTimeout(t);
+  }, [open, exitMs]);
+  return { mounted, shown };
+}
 
 /* ── Aparición al hacer scroll ───────────────────────────────────────────── */
 export function useReveal<T extends HTMLElement>() {

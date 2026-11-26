@@ -3,7 +3,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useCatalog } from "@/lib/catalog";
 import { cart, useCart } from "@/lib/store";
 import { toggleTheme, useTheme } from "@/lib/theme";
-import { IconArrow, IconBag, IconCheck, IconMenu, IconMoon, IconSearch, IconSun, IconWhatsApp, IconX, Mark, Marquee, Wordmark } from "./ui";
+import { IconArrow, IconBag, IconCheck, IconMenu, IconMoon, IconSearch, IconSun, IconWhatsApp, IconX, Mark, Marquee, usePresence, Wordmark } from "./ui";
 
 export function waLink(phone: string, text: string) {
   return `https://wa.me/${phone.replace(/\D/g, "")}?text=${encodeURIComponent(text)}`;
@@ -106,6 +106,7 @@ function Menu({ open, onClose }: { open: boolean; onClose: () => void }) {
     };
   }, [open, onClose]);
 
+  const { mounted, shown } = usePresence(open, 480);
   const links = [
     { href: "/", label: "Inicio" },
     { href: "/tienda", label: "Tienda" },
@@ -113,8 +114,9 @@ function Menu({ open, onClose }: { open: boolean; onClose: () => void }) {
   ];
   const social = [["Instagram", s?.instagram], ["TikTok", s?.tiktok], ["Facebook", s?.facebook]].filter((x): x is [string, string] => !!x[1]);
 
+  if (!mounted) return null;
   return (
-    <div className="menu glass-dark" data-open={open} role="dialog" aria-modal="true" aria-label="Menú" {...(!open ? { inert: true } : {})}>
+    <div className="menu glass-dark" data-open={shown} role="dialog" aria-modal="true" aria-label="Menú">
       <div className="pointer-events-none absolute -right-24 top-10 h-80 w-80 rounded-full" style={{ background: "radial-gradient(closest-side, var(--glow), transparent)" }} />
       <div className="pointer-events-none absolute -left-32 bottom-20 h-96 w-96 rounded-full opacity-70" style={{ background: "radial-gradient(closest-side, var(--glow), transparent)" }} />
       <div className="relative flex h-full flex-col px-6" style={{ paddingTop: "calc(env(safe-area-inset-top) + 14px)", paddingBottom: "calc(env(safe-area-inset-bottom) + 22px)" }}>
