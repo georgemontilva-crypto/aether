@@ -58,6 +58,11 @@ const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&l
 
 /** Para que al compartir un producto por WhatsApp salga su nombre, precio y foto. */
 async function withMeta(html: string, url: string): Promise<string> {
+  // El panel se puede instalar en el teléfono como app (y no debe salir en buscadores).
+  if (url.startsWith("/admin")) {
+    const tags = `<link rel="manifest" href="/admin.webmanifest"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Aether Panel"><meta name="robots" content="noindex">`;
+    return html.replace(/<title>.*?<\/title>/, "<title>Aether · Panel</title>").replace("</head>", `${tags}</head>`);
+  }
   const m = url.match(/^\/producto\/([a-z0-9-]+)/);
   if (!m) return html;
   const [p] = await db.select().from(products).where(eq(products.slug, m[1])).limit(1);

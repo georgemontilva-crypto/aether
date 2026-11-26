@@ -75,12 +75,13 @@ export function CartDrawer() {
 
   return (
     <div className={`fixed inset-0 z-50 ${open ? "" : "pointer-events-none"}`} aria-hidden={!open}>
-      <div className={`absolute inset-0 bg-black/60 backdrop-blur-[2px] transition-opacity duration-500 ${open ? "opacity-100" : "opacity-0"}`} onClick={cart.close} />
+      <div className={`absolute inset-0 bg-black/55 transition-opacity duration-500 ${open ? "opacity-100" : "opacity-0"}`} onClick={cart.close} />
       <aside
         role="dialog"
         aria-modal="true"
         aria-label="Carrito de compras"
-        className={`absolute right-0 top-0 flex h-full w-full max-w-[460px] flex-col border-l border-line bg-bg transition-transform duration-500 ease-expo ${open ? "translate-x-0" : "translate-x-full"}`}
+        className={`glass absolute right-0 top-0 flex h-full w-full max-w-[460px] flex-col !border-y-0 !border-r-0 transition-transform duration-500 ease-expo ${open ? "translate-x-0" : "translate-x-full"}`}
+        style={{ paddingTop: "env(safe-area-inset-top)", paddingBottom: "env(safe-area-inset-bottom)", background: "rgb(var(--glass-tint) / 0.82)" }}
         {...(!open ? { inert: true } : {})}
       >
         <div className="flex h-16 shrink-0 items-center justify-between border-b border-line px-5">
@@ -112,7 +113,7 @@ export function CartDrawer() {
             <ul className="flex-1 divide-y divide-line overflow-y-auto px-5">
               {rows.map((r) => (
                 <li key={`${r.productId}-${r.option}`} className="flex gap-4 py-4">
-                  <ProductImage src={r.p.images[0]?.thumbUrl} alt={r.p.name} className="h-24 w-20 shrink-0 border border-line object-cover" />
+                  <ProductImage src={r.p.images[0]?.thumbUrl} alt={r.p.name} className="h-24 w-20 shrink-0 rounded-(--radius-ctl) border border-line object-cover" />
                   <div className="flex min-w-0 flex-1 flex-col">
                     <div className="flex justify-between gap-2">
                       <p className="truncate font-mono text-[13px]">{r.p.name}</p>
@@ -133,7 +134,7 @@ export function CartDrawer() {
               ))}
             </ul>
             <div className="shrink-0 border-t border-line p-5">
-              {error && <p className="mb-3 border border-danger/50 p-3 text-sm text-danger" role="alert">{error}</p>}
+              {error && <p className="mb-3 rounded-(--radius-ctl) border border-danger/50 p-3 text-sm text-danger" role="alert">{error}</p>}
               <div className="mb-4 flex items-baseline justify-between">
                 <span className="label">Total</span>
                 <span className="font-mono text-2xl tabular-nums">{money(total)}</span>
@@ -169,7 +170,7 @@ export function CartDrawer() {
                 <span className="label mb-2 block">Nota (opcional)</span>
                 <textarea className="field min-h-20 resize-none" maxLength={500} value={form.note} onChange={(e) => setForm({ ...form, note: e.target.value })} placeholder="Algo que debamos saber" />
               </label>
-              <div className="border border-line p-4">
+              <div className="rounded-(--radius-card) border border-line p-4">
                 <p className="label mb-2">Resumen</p>
                 {rows.map((r) => (
                   <div key={`${r.productId}-${r.option}`} className="flex justify-between gap-3 py-0.5 font-mono text-xs">
@@ -187,7 +188,7 @@ export function CartDrawer() {
               </div>
             </div>
             <div className="shrink-0 border-t border-line p-5">
-              {error && <p className="mb-3 border border-danger/50 p-3 text-sm text-danger" role="alert">{error}</p>}
+              {error && <p className="mb-3 rounded-(--radius-ctl) border border-danger/50 p-3 text-sm text-danger" role="alert">{error}</p>}
               <div className="flex gap-2">
                 <button type="button" className="btn btn-ghost" onClick={() => setStep("carrito")}>
                   Atrás

@@ -23,7 +23,8 @@ export function toggleTheme(origin?: { x: number; y: number }) {
   const root = document.documentElement;
   root.style.setProperty("--vt-x", `${origin?.x ?? innerWidth / 2}px`);
   root.style.setProperty("--vt-y", `${origin?.y ?? 0}px`);
-  document.startViewTransition(() => flushSync(() => apply(next)));
+  root.classList.add("vt-theme");
+  document.startViewTransition(() => flushSync(() => apply(next))).finished.finally(() => root.classList.remove("vt-theme"));
 }
 
 export function useTheme(): Theme {

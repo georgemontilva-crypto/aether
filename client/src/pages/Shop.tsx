@@ -28,9 +28,11 @@ export default function Shop() {
     navigate(s ? `/tienda?${s}` : "/tienda", { replace: true });
   };
 
+  // "Buscar" (barra inferior o lupa) trae hasta aquí con el teclado ya abierto.
+  const wantsSearch = params.get("buscar");
   useEffect(() => {
-    if (params.get("buscar")) input.current?.focus();
-  }, []);
+    if (wantsSearch) input.current?.focus();
+  }, [wantsSearch]);
 
   const category = catalog?.categories.find((c) => c.slug === cat);
   const results = useMemo(() => {
@@ -55,15 +57,25 @@ export default function Shop() {
   }, [catalog, category, tags]);
 
   const filtering = !!(q || cat || tag);
+  const sortSelect = (className: string) => (
+    <select className={className} value={sort} onChange={(e) => set({ orden: e.target.value === "nuevo" ? "" : e.target.value })} aria-label="Ordenar">
+      {Object.entries(SORTS).map(([k, v]) => (
+        <option key={k} value={k}>{v}</option>
+      ))}
+    </select>
+  );
 
   return (
-    <div ref={ref} className="wrap pt-10">
+    <div ref={ref} className="wrap pt-7 md:pt-10">
       <div className="flex items-end justify-between gap-4">
         <h1 className="display text-[clamp(3rem,9vw,7rem)]">{category?.name ?? "Tienda"}</h1>
-        <span className="label pb-3 tabular-nums">{String(results.length).padStart(2, "0")} piezas</span>
+        <div className="flex flex-col items-end gap-1 pb-2 md:pb-3">
+          <span className="label tabular-nums">{String(results.length).padStart(2, "0")} piezas</span>
+          {sortSelect("md:hidden !min-h-9 !w-auto !border-0 !bg-transparent !p-0 !pr-1 text-right font-mono !text-[11px] uppercase tracking-[0.1em] text-muted")}
+        </div>
       </div>
 
-      <div className="sticky top-16 z-30 -mx-[clamp(16px,4vw,56px)] mt-6 border-y border-line bg-bg/90 px-[clamp(16px,4vw,56px)] py-3 backdrop-blur-md">
+      <div className="glass shop-sticky sticky z-30 -mx-[clamp(16px,4vw,56px)] mt-5 !border-x-0 px-[clamp(16px,4vw,56px)] py-3 !shadow-none">
         <div className="flex gap-2">
           <label className="relative flex-1">
             <span className="sr-only">Buscar productos</span>
@@ -75,13 +87,7 @@ export default function Shop() {
               </button>
             )}
           </label>
-          <select className="field !w-auto max-w-[44%] font-mono !text-xs" value={sort} onChange={(e) => set({ orden: e.target.value === "nuevo" ? "" : e.target.value })} aria-label="Ordenar">
-            {Object.entries(SORTS).map(([k, v]) => (
-              <option key={k} value={k}>
-                {v}
-              </option>
-            ))}
-          </select>
+          {sortSelect("field hidden !w-auto font-mono !text-xs md:block")}
         </div>
         <div className="scroll-x mt-2.5">
           <button className="chip" aria-pressed={!cat} onClick={() => set({ cat: "", tag: "" })}>
@@ -105,13 +111,13 @@ export default function Shop() {
         {isLoading ? (
           <div className="grid grid-cols-2 gap-x-3 gap-y-8 sm:gap-x-5 md:grid-cols-3 lg:grid-cols-4">
             {Array.from({ length: 8 }, (_, i) => (
-              <div key={i} className="aspect-[4/5] animate-pulse border border-line bg-surface" />
+              <div key={i} className="aspect-[4/5] animate-pulse rounded-(--radius-card) border border-line bg-surface" />
             ))}
           </div>
         ) : results.length ? (
           <ProductGrid products={results} />
         ) : (
-          <div className="flex flex-col items-center gap-4 border border-line px-6 py-20 text-center">
+          <div className="flex flex-col items-center gap-4 rounded-(--radius-panel) border border-line px-6 py-20 text-center">
             <p className="display text-4xl">Nada por aquí.</p>
             <p className="max-w-sm text-muted">No encontramos piezas con esa búsqueda. Prueba con otra palabra o pídela por encargo.</p>
             {filtering && (

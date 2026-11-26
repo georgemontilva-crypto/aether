@@ -15,7 +15,7 @@ function ScrollTop() {
   const [path] = useLocation();
   // Con llaves a propósito: en navegadores nuevos scrollTo devuelve una promesa y React la tomaría por "limpieza".
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: "instant" });
   }, [path]);
   return null;
 }

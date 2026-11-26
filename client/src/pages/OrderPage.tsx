@@ -43,7 +43,7 @@ export default function OrderPage() {
         </p>
       )}
 
-      <article className="rise mt-8 w-full max-w-md border border-line bg-surface font-mono text-sm" style={{ ["--i" as string]: 3 }} aria-label="Recibo del pedido">
+      <article className="rise mt-8 w-full max-w-md overflow-hidden rounded-(--radius-panel) border border-line bg-surface font-mono text-sm" style={{ ["--i" as string]: 3 }} aria-label="Recibo del pedido">
         <header className="flex items-center justify-between border-b border-dashed border-line p-5">
           <div>
             <p className="label">Pedido</p>

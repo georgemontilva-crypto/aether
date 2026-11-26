@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { money, normalize } from "@shared/text";
 import { errorText, trpc, type AdminData } from "@/lib/trpc";
 import { ProductImage } from "@/components/ProductCard";
-import { IconPlus, IconSearch } from "@/components/ui";
+import { IconPlus, IconSearch, IconX } from "@/components/ui";
 
 type Row = AdminData["products"][number];
 type Filter = "todos" | "agotados" | "bajo" | "ocultos";
@@ -41,23 +41,26 @@ function StockCell({ p }: { p: Row }) {
     }, 550);
   };
 
+  const tone = state === "error" ? "border-danger" : state === "saved" ? "border-ok" : state === "saving" ? "border-violet" : "border-line";
   return (
-    <div className="flex flex-col items-end gap-1">
-      <div className="flex items-center border border-line">
-        <button className="grid h-10 w-10 place-items-center text-lg hover:bg-raised disabled:opacity-30" onClick={() => change(value - 1)} disabled={value <= 0} aria-label={`Restar una pieza de ${p.name}`}>−</button>
+    <div className="flex shrink-0 flex-col items-end">
+      <div className={`flex items-center overflow-hidden rounded-(--radius-ctl) border transition-colors ${tone}`}>
+        <button className="grid h-11 w-11 place-items-center text-xl active:bg-raised disabled:opacity-30" onClick={() => change(value - 1)} disabled={value <= 0} aria-label={`Restar una pieza de ${p.name}`}>−</button>
         <input
-          className="h-10 w-14 border-x border-line bg-transparent text-center font-mono text-base tabular-nums focus:bg-raised focus:outline-none"
+          className={`h-11 w-12 border-x border-line bg-transparent text-center font-mono text-base tabular-nums focus:bg-raised focus:outline-none ${value === 0 ? "text-danger" : ""}`}
           inputMode="numeric"
+          pattern="[0-9]*"
+          enterKeyHint="done"
           value={value}
           onFocus={(e) => e.target.select()}
+          onKeyDown={(e) => e.key === "Enter" && e.currentTarget.blur()}
           onChange={(e) => change(Number(e.target.value.replace(/\D/g, "")))}
           aria-label={`Piezas en existencia de ${p.name}`}
         />
-        <button className="grid h-10 w-10 place-items-center text-lg hover:bg-raised" onClick={() => change(value + 1)} aria-label={`Sumar una pieza de ${p.name}`}>+</button>
+        <button className="grid h-11 w-11 place-items-center text-xl active:bg-raised" onClick={() => change(value + 1)} aria-label={`Sumar una pieza de ${p.name}`}>+</button>
       </div>
-      <span className={`h-3 font-mono text-[10px] uppercase tracking-widest ${state === "error" ? "text-danger" : state === "saved" ? "text-ok" : "text-muted"}`} aria-live="polite">
-        {state === "saving" ? "guardando…" : state === "saved" ? "guardado ✓" : state === "error" ? "no se guardó" : ""}
-      </span>
+      <span className="sr-only" aria-live="polite">{state === "saved" ? "guardado" : state === "error" ? "no se guardó" : ""}</span>
+      {state === "error" && <span className="mt-1 font-mono text-[10px] uppercase tracking-widest text-danger">no se guardó</span>}
     </div>
   );
 }
@@ -68,15 +71,15 @@ function PhotosBanner({ storage }: { storage: AdminData["storage"] }) {
   const { mode, externalPhotos, migration } = storage;
   if (!externalPhotos && mode !== "none") return null;
   return (
-    <div className="mb-6 flex flex-wrap items-center justify-between gap-3 border border-violet/60 bg-violet/10 p-4 text-sm">
+    <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-(--radius-card) border border-violet/60 bg-violet/10 p-3 pl-4 text-sm md:p-4 md:pl-5">
       {mode === "none" ? (
-        <p><strong>Falta conectar el almacenamiento de fotos (R2).</strong> El catálogo se ve porque las fotos todavía se cargan desde la tienda de Odoo, pero no podrás subir fotos nuevas hasta poner las variables <code className="font-mono">R2_*</code> en Railway.</p>
+        <p><strong>Falta conectar el almacenamiento de fotos (R2).</strong> El catálogo se ve porque las fotos aún se cargan desde Odoo, pero no podrás subir fotos nuevas hasta poner las variables <code className="font-mono">R2_*</code> en Railway.</p>
       ) : migration.running ? (
         <p>Copiando fotos al almacenamiento propio… <strong className="font-mono">{migration.done}/{migration.total}</strong></p>
       ) : (
         <>
-          <p><strong>{externalPhotos} fotos todavía se cargan desde Odoo.</strong> Cópialas a tu almacenamiento para no depender de la tienda vieja.{migration.failed > 0 && <span className="text-danger"> La última vez fallaron {migration.failed}: {migration.lastError}</span>}</p>
-          <button className="btn btn-sm" onClick={() => migrate.mutate()} disabled={migrate.isPending}>Copiar fotos ahora</button>
+          <p className="min-w-0 flex-1"><strong>{externalPhotos} fotos aún se cargan desde Odoo.</strong>{migration.failed > 0 && <span className="block text-danger">Fallaron {migration.failed}: {migration.lastError}</span>}</p>
+          <button className="btn btn-sm" onClick={() => migrate.mutate()} disabled={migrate.isPending}>Copiar ahora</button>
         </>
       )}
       {migrate.error && <p className="w-full text-danger">{errorText(migrate.error)}</p>}
@@ -85,11 +88,9 @@ function PhotosBanner({ storage }: { storage: AdminData["storage"] }) {
 }
 
 export default function Inventory({ data }: { data: AdminData }) {
-  const utils = trpc.useUtils();
   const [q, setQ] = useState("");
   const [filter, setFilter] = useState<Filter>("todos");
   const [cat, setCat] = useState(0);
-  const setActive = trpc.admin.setActive.useMutation({ onSuccess: () => (utils.admin.data.invalidate(), utils.shop.catalog.invalidate()) });
   const low = data.settings.lowStock;
   const cats = new Map(data.categories.map((c) => [c.id, c.name]));
 
@@ -99,8 +100,9 @@ export default function Inventory({ data }: { data: AdminData }) {
       pieces: data.products.reduce((a, p) => a + p.stock, 0),
       value: data.products.reduce((a, p) => a + p.stock * p.price, 0),
       active: active.length,
-      out: active.filter((p) => p.stock === 0).length,
-      low: active.filter((p) => p.stock > 0 && p.stock <= low).length,
+      out: data.products.filter((p) => p.stock === 0).length,
+      low: data.products.filter((p) => p.stock > 0 && p.stock <= low).length,
+      hidden: data.products.length - active.length,
     };
   }, [data.products, low]);
 
@@ -115,69 +117,78 @@ export default function Inventory({ data }: { data: AdminData }) {
     });
   }, [data.products, q, filter, cat, low]);
 
-  const filters: [Filter, string, number][] = [
-    ["todos", "Todos", data.products.length],
-    ["agotados", "Agotados", data.products.filter((p) => p.stock === 0).length],
-    ["bajo", "Stock bajo", data.products.filter((p) => p.stock > 0 && p.stock <= low).length],
-    ["ocultos", "Ocultos", data.products.filter((p) => !p.active).length],
+  // Las cifras de arriba también son filtros: tocar "Agotados" muestra los agotados.
+  const tiles: { label: string; value: string; tone?: string; filter?: Filter }[] = [
+    { label: "Piezas", value: String(stats.pieces), tone: "text-violet", filter: "todos" },
+    { label: "Agotados", value: String(stats.out), tone: stats.out ? "text-danger" : "", filter: "agotados" },
+    { label: "Stock bajo", value: String(stats.low), filter: "bajo" },
+    { label: "Ocultos", value: String(stats.hidden), filter: "ocultos" },
+    { label: "Valor", value: money(stats.value) },
   ];
 
   return (
     <>
       <PhotosBanner storage={data.storage} />
 
-      <div className="grid grid-cols-2 gap-px border border-line bg-line md:grid-cols-5">
-        {[
-          ["Piezas en existencia", String(stats.pieces), "text-violet"],
-          ["Productos visibles", String(stats.active), ""],
-          ["Agotados", String(stats.out), stats.out ? "text-danger" : ""],
-          ["Stock bajo", String(stats.low), ""],
-          ["Valor del inventario", money(stats.value), ""],
-        ].map(([label, value, tone], i) => (
-          <div key={label} className={`bg-bg p-4 ${i === 4 ? "col-span-2 md:col-span-1" : ""}`}>
-            <p className="label">{label}</p>
-            <p className={`mt-1 font-mono text-3xl tabular-nums ${tone}`}>{value}</p>
-          </div>
-        ))}
+      <div className="scroll-x -mx-[clamp(16px,4vw,56px)] !gap-2 px-[clamp(16px,4vw,56px)] md:mx-0 md:grid md:grid-cols-5 md:!gap-px md:overflow-hidden md:rounded-(--radius-card) md:border md:border-line md:bg-line md:px-0">
+        {tiles.map((t) => {
+          const on = !!t.filter && filter === t.filter && t.filter !== "todos";
+          return (
+            <button
+              key={t.label}
+              disabled={!t.filter}
+              onClick={() => t.filter && setFilter(on ? "todos" : t.filter)}
+              aria-pressed={t.filter ? on : undefined}
+              className={`min-w-[104px] shrink-0 rounded-(--radius-ctl) border p-3 text-left md:min-w-0 md:rounded-none md:border-0 md:bg-bg md:p-4 ${on ? "border-violet bg-violet/10 md:!bg-violet/10" : "border-line"} ${t.filter ? "active:bg-raised" : "!cursor-default"}`}
+            >
+              <span className="label block">{t.label}</span>
+              <span className={`mt-0.5 block font-mono text-2xl tabular-nums md:text-3xl ${t.tone ?? ""}`}>{t.value}</span>
+            </button>
+          );
+        })}
       </div>
 
-      <div className="mt-6 flex flex-wrap items-center gap-2">
-        <label className="relative min-w-[200px] flex-1">
-          <span className="sr-only">Buscar en el inventario</span>
-          <IconSearch className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-muted" width={18} height={18} />
-          <input className="field !pl-11" type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Buscar producto o hashtag…" />
-        </label>
-        <select className="field !w-auto" value={cat} onChange={(e) => setCat(Number(e.target.value))} aria-label="Categoría">
-          <option value={0}>Todas las categorías</option>
-          {data.categories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
-        </select>
-        <Link href="/admin/producto/nuevo" className="btn btn-violet hidden md:inline-flex"><IconPlus width={16} height={16} /> Nuevo producto</Link>
-      </div>
-      <div className="scroll-x mt-3">
-        {filters.map(([key, label, n]) => (
-          <button key={key} className="chip" aria-pressed={filter === key} onClick={() => setFilter(key)}>{label} <span className="opacity-70">{n}</span></button>
-        ))}
+      <div className="admin-sticky sticky z-30 -mx-[clamp(16px,4vw,56px)] mt-3 border-b border-line bg-bg/95 px-[clamp(16px,4vw,56px)] py-2.5 backdrop-blur-md md:mt-5">
+        <div className="flex gap-2">
+          <label className="relative flex-1">
+            <span className="sr-only">Buscar en el inventario</span>
+            <IconSearch className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-muted" width={18} height={18} />
+            <input className="field !pl-11 !pr-11" type="search" enterKeyHint="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Buscar producto o hashtag…" />
+            {q && (
+              <button className="absolute right-0.5 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center text-muted" onClick={() => setQ("")} aria-label="Borrar búsqueda">
+                <IconX width={16} height={16} />
+              </button>
+            )}
+          </label>
+          <Link href="/admin/producto/nuevo" className="btn btn-violet hidden md:inline-flex"><IconPlus width={16} height={16} /> Nuevo producto</Link>
+        </div>
+        <div className="scroll-x -mx-[clamp(16px,4vw,56px)] mt-2 px-[clamp(16px,4vw,56px)]">
+          <button className="chip" aria-pressed={!cat} onClick={() => setCat(0)}>Todas</button>
+          {data.categories.map((c) => (
+            <button key={c.id} className="chip" aria-pressed={cat === c.id} onClick={() => setCat(cat === c.id ? 0 : c.id)}>{c.name}</button>
+          ))}
+        </div>
       </div>
 
-      <ul className="mt-4 divide-y divide-line border-y border-line">
+      <p className="label mt-3 flex items-center justify-between">
+        <span>{rows.length} {rows.length === 1 ? "producto" : "productos"}{filter !== "todos" && ` · ${{ agotados: "agotados", bajo: "stock bajo", ocultos: "ocultos" }[filter]}`}</span>
+        {(filter !== "todos" || cat !== 0 || q) && <button className="underline underline-offset-4" onClick={() => (setFilter("todos"), setCat(0), setQ(""))}>Quitar filtros</button>}
+      </p>
+
+      <ul className="mt-2 divide-y divide-line border-y border-line">
         {rows.map((p) => (
-          <li key={p.id} className={`flex items-center gap-3 py-3 sm:gap-4 ${p.active ? "" : "opacity-55"}`}>
-            <Link href={`/admin/producto/${p.id}`} className="shrink-0" aria-label={`Editar ${p.name}`}>
-              <ProductImage src={p.images[0]?.thumbUrl} alt="" className="h-16 w-14 border border-line object-cover" />
+          <li key={p.id} className="flex items-center gap-3 py-2.5">
+            <Link href={`/admin/producto/${p.id}`} className={`flex min-w-0 flex-1 items-center gap-3 active:opacity-60 ${p.active ? "" : "opacity-50"}`} aria-label={`Editar ${p.name}`}>
+              <ProductImage src={p.images[0]?.thumbUrl} alt="" className="h-[60px] w-[50px] shrink-0 rounded-[10px] border border-line object-cover" />
+              <span className="min-w-0">
+                <span className="line-clamp-2 break-words font-mono text-[13px] leading-snug">{p.name}</span>
+                <span className="mt-0.5 block truncate text-xs text-muted">
+                  {money(p.price)} · {cats.get(p.categoryId) ?? "Sin categoría"}
+                  {!p.active && " · oculto"}
+                  {p.stock > 0 && p.stock <= low && <span className="text-violet"> · stock bajo</span>}
+                </span>
+              </span>
             </Link>
-            <div className="min-w-0 flex-1">
-              <Link href={`/admin/producto/${p.id}`} className="block truncate font-mono text-sm hover:text-violet">{p.name}</Link>
-              <p className="mt-0.5 truncate text-xs text-muted">
-                {money(p.price)} · {cats.get(p.categoryId) ?? "Sin categoría"}
-                {p.stock === 0 ? <span className="text-danger"> · agotado</span> : p.stock <= low ? <span className="text-violet"> · stock bajo</span> : null}
-              </p>
-              <div className="mt-1 flex items-center gap-3">
-                <button className="font-mono text-[10px] uppercase tracking-widest text-muted underline-offset-4 hover:text-ink hover:underline" onClick={() => setActive.mutate({ id: p.id, active: !p.active })}>
-                  {p.active ? "Visible · ocultar" : "Oculto · mostrar"}
-                </button>
-                <Link href={`/admin/producto/${p.id}`} className="font-mono text-[10px] uppercase tracking-widest text-muted underline-offset-4 hover:text-ink hover:underline">Editar</Link>
-              </div>
-            </div>
             <StockCell p={p} />
           </li>
         ))}
@@ -185,8 +196,8 @@ export default function Inventory({ data }: { data: AdminData }) {
       </ul>
 
       {data.movements.length > 0 && (
-        <details className="mt-10 border border-line">
-          <summary className="label p-4 !text-ink">Últimos movimientos de inventario</summary>
+        <details className="mt-8 overflow-hidden rounded-(--radius-card) border border-line">
+          <summary className="label flex min-h-12 items-center px-4 !text-ink">Últimos movimientos de inventario</summary>
           <ul className="divide-y divide-line border-t border-line">
             {data.movements.map((m) => (
               <li key={m.id} className="flex items-center justify-between gap-3 px-4 py-2.5 text-sm">
@@ -200,4 +211,3 @@ export default function Inventory({ data }: { data: AdminData }) {
     </>
   );
 }
-

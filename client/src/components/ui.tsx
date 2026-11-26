@@ -36,6 +36,14 @@ export const IconX = icon(<path d="m6 6 12 12M18 6 6 18" />);
 export const IconArrow = icon(<path d="M4 12h16m-6-6 6 6-6 6" />);
 export const IconCheck = icon(<path d="m5 12.5 4.5 4.5L19 7.5" />);
 export const IconTrash = icon(<path d="M4 7h16M9 7V4.5h6V7m-8.5 0 1 13h9l1-13M10 11v5.5M14 11v5.5" />);
+export const IconBox = icon(<><path d="M3.5 7.5 12 3l8.5 4.5v9L12 21l-8.5-4.5v-9Z" /><path d="M3.5 7.5 12 12l8.5-4.5M12 12v9" /></>);
+export const IconReceipt = icon(<><path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3Z" /><path d="M9 8h6M9 12h6" /></>);
+export const IconGear = icon(<><circle cx="12" cy="12" r="3" /><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1" /></>);
+export const IconCamera = icon(<><path d="M4 8h3l1.5-2.5h7L17 8h3v11H4V8Z" /><circle cx="12" cy="13" r="3.5" /></>);
+export const IconImage = icon(<><path d="M4 5h16v14H4V5Z" /><path d="m4 16 4.5-4.5 4 4 2.5-2.5L20 18" /><circle cx="15.5" cy="9" r="1.3" /></>);
+export const IconMenu = icon(<path d="M4 9h16M4 15h10" />);
+export const IconHome = icon(<><path d="M4 11 12 4l8 7v9H4v-9Z" /><path d="M10 20v-5h4v5" /></>);
+export const IconGrid = icon(<path d="M4 4h7v7H4V4Zm9 0h7v7h-7V4ZM4 13h7v7H4v-7Zm9 0h7v7h-7v-7Z" />);
 export const IconUp = icon(<path d="m6 14 6-6 6 6" />);
 export const IconWhatsApp = icon(<><path d="M3.5 20.5l1.3-4.3A8.5 8.5 0 1 1 8 19.3l-4.5 1.2Z" /><path d="M9.2 8.3c-.4 2.9 3.3 6.7 6.4 6.4l.9-1.4-1.9-1.2-.9.8c-1-.4-2-1.4-2.4-2.4l.8-.9-1.2-1.9-1.7.6Z" /></>);
 
@@ -84,7 +92,7 @@ export function Marquee({ items, speed = 36, className = "" }: { items: string[]
 export function Stepper({ value, min = 0, max, onChange, small = false }: { value: number; min?: number; max: number; onChange: (n: number) => void; small?: boolean }) {
   const size = small ? "h-9 w-9" : "h-12 w-12";
   return (
-    <div className="inline-flex items-center border border-line">
+    <div className="inline-flex items-center overflow-hidden rounded-full border border-line">
       <button type="button" className={`${size} grid place-items-center hover:bg-raised disabled:opacity-30`} onClick={() => onChange(value - 1)} disabled={value <= min} aria-label="Quitar uno">
         <IconMinus width={16} height={16} />
       </button>
