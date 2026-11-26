@@ -72,7 +72,7 @@ export default function ProductPage() {
       </nav>
 
       <div className="mt-5 grid gap-8 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
-        <div>
+        <div className="lg:ml-auto lg:w-full lg:max-w-[560px]">
           {/* Teléfono: fotos a todo el ancho, se pasan con el dedo. Escritorio: foto grande + miniaturas. */}
           <div key={p.id} ref={hero} data-product-hero className="relative overflow-hidden rounded-(--radius-panel) border border-line" style={{ viewTransitionName: "product-shot" }}>
             <div ref={strip} className="flex snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] md:block md:overflow-visible [&::-webkit-scrollbar]:hidden" onScroll={(e) => setShot(Math.round(e.currentTarget.scrollLeft / e.currentTarget.clientWidth))}>

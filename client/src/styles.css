@@ -547,24 +547,27 @@ input[type="search"]::-webkit-search-cancel-button {
     margin-top: 34px;
   }
 }
-/* Carruseles con el dedo */
-.snap-row {
-  display: flex;
-  gap: 12px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-  margin-inline: calc(-1 * clamp(16px, 4vw, 56px));
-  padding-inline: clamp(16px, 4vw, 56px);
-  scroll-padding-inline: clamp(16px, 4vw, 56px);
-}
-.snap-row::-webkit-scrollbar {
-  display: none;
-}
-.snap-row > * {
-  scroll-snap-align: start;
-  flex-shrink: 0;
+/* Carruseles con el dedo. Van en la capa de componentes para que las utilidades (lg:grid, md:px-0…)
+   puedan convertirlos en cuadrícula en pantallas grandes. */
+@layer components {
+  .snap-row {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    margin-inline: calc(-1 * clamp(16px, 4vw, 56px));
+    padding-inline: clamp(16px, 4vw, 56px);
+    scroll-padding-inline: clamp(16px, 4vw, 56px);
+  }
+  .snap-row::-webkit-scrollbar {
+    display: none;
+  }
+  .snap-row > * {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
 }
 /* Línea de avance de lectura, sobre el borde inferior del encabezado */
 .progress {
